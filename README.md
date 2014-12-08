@@ -36,8 +36,8 @@
 
 关于如何在JS中定义类（CALSS）的方法，可以参见如下代码：
 
-```
-function person(name,age,sex){
+```javascript
+function Person(name,age,sex){
   this.name = name;
   this.age = age;
   this.sex = sex;
@@ -52,11 +52,64 @@ function person(name,age,sex){
 
 我们可以参考定义类时所用的代码（详情参见上图），其中this.的语句代表了定义的方法，
 我们通过了
-```
+```javascript
 this.name = name;
 this.age = age;
 this.sex = sex;
 ```
 给person这样的类定义了三个称之为name，age，sex的属性。
 
-####
+####在JS中定义方法####
+
+类方法
+```javascript
+function Person(name,age,sex){
+  this.name = name;
+  this.age = age;
+  this.sex = sex;
+}
+Person.HelloWorld = function() {
+  return 'HelloWorld'
+}
+```
+我们可以看到，在上面的方法中，我们给Person这样的类加入了语句，
+实现了在类中定义方法。
+
+实例方法
+```javascript
+function Person(name,age,sex){
+  this.name = name;
+  this.age = age;
+  this.sex = sex;
+  }
+  Person.prototype.HelloWorld = function() {
+    return 'HelloWorld';
+  };
+  ```
+
+###四.继承，封装，多态###
+
+关于继承
+
+继承是面向对象语言的重要机制。借助继承，可以扩展原有的代码，应用到其他程序中，而不必重新编写这些代码。在java语言中，继承是通过扩展原有的类，声明新类来实现的。扩展声明的新类称为子类，原有的类称为超类（父类）。继承机制规定，子类可以拥有超类的所有属性和方法，也可以扩展定义自己特有的属性，增加新方法和重新定义超类的方法。
+
+
+```javascript
+function Person(name,age,sex){
+  this.name = name;
+  this.age = age;
+  this.sex = sex;
+}
+function female(name,age,sex){
+   Person.call(this,name,age,sex)
+}
+Female.prototype = Object.creat(Person.prototype);
+Female.prototype.constructor = female;
+```
+
+通过以上代码，我们可以看到，通过function的操作，我们定义了一个基于
+父类Person而继承的子类female
+
+关于封装
+
+在Javascript中，关于封装，是指基于面向对象的软件开发中，每个属性被隐藏在对象之后，你所能看到的就是这个对象让你看到的。就是面向对象变成中的类，将一些命令写在一起组合成一个类，可以new一个使用
